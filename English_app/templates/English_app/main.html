@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,34 +14,69 @@
     <header>
         <div><img src="{% static 'images/ico/logo.png' %}" alt="logo"></div>
         <p>English at Home</p>
+        <a href="{% url 'logout' %}">Выход</a>
+        {% if user.is_authenticated %}
+        <h1>{{ user.username }}</h1>
+        {% endif %}
     </header>
     <div class="main-text">
-        <p>ИЗУЧИ АНГЛИЙСКИЙ<br>
-        ЛЕГКО И БЫСТРО<br>
-        С НАМИ!</p>
+        <p>ИЗУЧИ АНГЛИЙСКИЙ<br>ЛЕГКО И БЫСТРО<br>С НАМИ!</p>
     </div>
 </div>
 
-<div class="cards-container">
-    <div class="cards front-contant" id="cards">
-        <img src="{% static 'images/table.jpg' %}" alt="card">
+<div class="flip-card-container">
+    <div class="card-container">
+        <div class="card active" onclick="flipCard(this)">
+            <div class="front"><img class="chair-img" src="{% static 'images/chair.jpg' %}" alt="chair-img"></div>
+            <div class="back">Chair</div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="front"><img class="bag-img" src="{% static 'images/bag.jpg' %}" alt="bag-img"></div>
+            <div class="back">Bag</div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="front"><img class="pen-img" src="{% static 'images/pen.jpg' %}" alt="pen-img"></div>
+            <div class="back">Pen</div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="front"><img class="table-img" src="{% static 'images/table.jpg' %}" alt="table-img"></div>
+            <div class="back">Table</div>
+        </div>
     </div>
 
-    <!-- <div class="cards back-contant">
-        <div class="back">
-        <h2>hello</h2>
-    </div>
-    </div> -->
-
-    <div class="cards-button">
-        <button><</button>
-        <button>></button>
+    <div class="flip-buttons">
+        <button onclick="prevCard()">&#8592;</button>
+        <button onclick="nextCard()">&#8594;</button>
     </div>
 </div>
 
-<div class="passed-words-container">
-    <h1>Пройденные слова</h1>
-</div>
+<script>
+    const cards = document.querySelectorAll('.card');
+    let current = 0;
+
+    function showCard(index) {
+        cards.forEach((card, i) => {
+            card.classList.remove('active', 'flipped');
+            if (i === index) {
+                card.classList.add('active');
+            }
+        });
+    }
+
+    function nextCard() {
+        current = (current + 1) % cards.length;
+        showCard(current);
+    }
+
+    function prevCard() {
+        current = (current - 1 + cards.length) % cards.length;
+        showCard(current);
+    }
+
+    function flipCard(card) {
+        card.classList.toggle('flipped');
+    }
+</script>
 
 <div class="information-container">
     <div class="block-container">
@@ -52,7 +87,7 @@
         <div class="block-two block">
             <img src="{% static 'images/ico/brain.png' %}" alt="ico">
             <p>Используем<br>искусственный<br>интеллект<br>для умного подбора<br>карточек</p>
-        </div>  
+        </div>
         <div class="block-three block">
             <img src="{% static 'images/ico/efficiency.png' %}" alt="ico">
             <p>Изучай слова<br>быстрее и эффективнее<br>с помощью нашей<br>технологии</p>
@@ -60,31 +95,59 @@
     </div>
 </div>
 
+<div class="form-container">
+    <form class="box-form" method="post" action="">
+        {% csrf_token %}
+        <div class="input-form-container">
+            <div class="form form-one">
+                <input class="Border_red" type="text" name="username" placeholder="Логин" required value="" >
+                {% if form.username.errors %}
+                    <div class="text-danger">
+                        {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form form-two">
+                <input class="Border_red" type="password" name="password" placeholder="Пароль" required>
+                {% if form.password.errors %}
+                    <div class="text-danger">
+                        {% for error in form.password.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if form.non_field_errors %}
+            <!-- <div class="form-errors">
+                {% for error in form.non_field_errors %}
+                    <p class="error-text">{{ error }}</p>
+                {% endfor %}
+            </div> -->
+            <style>
+                .Border_red{
+                    border: 5px solid red;                   
+                }
+            </style>
+        {% endif %}
+
+        <div class="form-button-container">
+            <button type="submit">Войти</button>
+            <a href="{% url 'register' %}">Регистрация</a>
+        </div>
+    </form>
+</div>
+
 <footer>
     <p>2025 Hackathon</p>
     <div class="logo-footer">
-        <div class="logo-footer-img">
-            <img src="{% static 'images/ico/logo.png' %}" alt="logo-footer">
-        </div>
+        <div class="logo-footer-img"><img src="{% static 'images/ico/logo.png' %}" alt="logo-footer"></div>
         <p>English at Home</p>
     </div>
 </footer>
-
-<!--
-    <div class="card-container">
-        <input type="checkbox" id="flip-toggle" hidden />
-        <label class="card" for="flip-toggle">
-        <div class="card-inner">
-            <div class="card-front">
-            Лицевая сторона
-            </div>
-            <div class="card-back">
-            Обратная сторона — текст здесь
-            </div>
-        </div>
-        </label>
-    </div>
--->
 
 </body>
 </html>
