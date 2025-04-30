@@ -18,9 +18,11 @@
         <p>English at Home</p>
     </div>
     
+    {% if user.is_authenticated %}
     <div class="box-output">
         <a class="output" href="{% url 'logout' %}">Выход</a>
     </div>
+    {% endif %}
         <!-- {% if user.is_authenticated %}
         <h1>{{ user.username }}</h1>
         {% endif %} -->
