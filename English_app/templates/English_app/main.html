@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English at Home</title>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'styles/fonts/fonts.css' %}" type="text/css">
+</head>
+<body>
+
+<div class="container-header">
+    <header>
+        <div><img src="{% static 'images/ico/logo.png' %}" alt="logo"></div>
+        <p>English at Home</p>
+    </header>
+    <div class="main-text">
+        <p>ИЗУЧИ АНГЛИЙСКИЙ<br>
+        ЛЕГКО И БЫСТРО<br>
+        С НАМИ!</p>
+    </div>
+</div>
+
+<div class="cards-container">
+    <div class="cards front-contant" id="cards">
+        <img src="{% static 'images/table.jpg' %}" alt="card">
+    </div>
+
+    <!-- <div class="cards back-contant">
+        <div class="back">
+        <h2>hello</h2>
+    </div>
+    </div> -->
+
+    <div class="cards-button">
+        <button><</button>
+        <button>></button>
+    </div>
+</div>
+
+<div class="passed-words-container">
+    <h1>Пройденные слова</h1>
+</div>
+
+<div class="information-container">
+    <div class="block-container">
+        <div class="block-one block">
+            <img src="{% static 'images/ico/hat.png' %}" alt="ico">
+            <p>Меньше зубрежки<br>- больше<br>результата</p>
+        </div>
+        <div class="block-two block">
+            <img src="{% static 'images/ico/brain.png' %}" alt="ico">
+            <p>Используем<br>искусственный<br>интеллект<br>для умного подбора<br>карточек</p>
+        </div>  
+        <div class="block-three block">
+            <img src="{% static 'images/ico/efficiency.png' %}" alt="ico">
+            <p>Изучай слова<br>быстрее и эффективнее<br>с помощью нашей<br>технологии</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>2025 Hackathon</p>
+    <div class="logo-footer">
+        <div class="logo-footer-img">
+            <img src="{% static 'images/ico/logo.png' %}" alt="logo-footer">
+        </div>
+        <p>English at Home</p>
+    </div>
+</footer>
+
+<!--
+    <div class="card-container">
+        <input type="checkbox" id="flip-toggle" hidden />
+        <label class="card" for="flip-toggle">
+        <div class="card-inner">
+            <div class="card-front">
+            Лицевая сторона
+            </div>
+            <div class="card-back">
+            Обратная сторона — текст здесь
+            </div>
+        </div>
+        </label>
+    </div>
+-->
+
+</body>
+</html>
