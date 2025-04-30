@@ -7,14 +7,20 @@
     <title>English at Home</title>
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'styles/fonts/fonts.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'styles/adaptiv.css' %}">
 </head>
 <body>
 
 <div class="container-header">
     <header>
+        <div class="box-logo">
         <div><img src="{% static 'images/ico/logo.png' %}" alt="logo"></div>
         <p>English at Home</p>
-        <a href="{% url 'logout' %}">Выход</a>
+    </div>
+    
+    <div class="box-output">
+        <a class="output" href="{% url 'logout' %}">Выход</a>
+    </div>
         {% if user.is_authenticated %}
         <h1>{{ user.username }}</h1>
         {% endif %}
@@ -44,6 +50,7 @@
         </div>
     </div>
 
+    <br>
     <div class="flip-buttons">
         <button onclick="prevCard()">&#8592;</button>
         <button onclick="nextCard()">&#8594;</button>
@@ -77,6 +84,8 @@
         card.classList.toggle('flipped');
     }
 </script>
+
+<br><br><br><br><br><br>
 
 <div class="information-container">
     <div class="block-container">
@@ -122,11 +131,6 @@
         </div>
 
         {% if form.non_field_errors %}
-            <!-- <div class="form-errors">
-                {% for error in form.non_field_errors %}
-                    <p class="error-text">{{ error }}</p>
-                {% endfor %}
-            </div> -->
             <style>
                 .Border_red{
                     border: 5px solid red;                   
